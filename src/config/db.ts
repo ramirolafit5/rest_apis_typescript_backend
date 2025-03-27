@@ -12,17 +12,14 @@ dotenv.config();
 } */
 
 // Crear instancia de Sequelize con variables de entorno
-const db = new Sequelize(process.env.DATABASE_URL as string, {
-  dialect: "postgres",
-  models: [__dirname + "/../models/*.model.ts"],  // Asegúrate de que la ruta de tus modelos sea correcta
-  logging: false, // Opcional: desactivar logs
+const db = new Sequelize(process.env.DATABASE_URL!, {
+  models: [__dirname + '/../models/**/*'],
+  logging: false,
   dialectOptions: {
     ssl: {
-      require: true, // Habilitar SSL
-      rejectUnauthorized: false, // Aceptar certificados no verificados (si es necesario)
+      require: true,
     },
   },
 });
-
-
+ 
 export default db;
