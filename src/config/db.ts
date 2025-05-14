@@ -12,14 +12,15 @@ dotenv.config();
 } */
 
 // Crear instancia de Sequelize con variables de entorno
-const db = new Sequelize(process.env.DATABASE_URL!, {
+const db = new Sequelize({
+  dialect: "postgres",
+  host: process.env.DB_HOST,
+  port: Number(process.env.DB_PORT),
+  database: process.env.DB_NAME,
+  username: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
   models: [__dirname + '/../models/**/*'],
-  logging: false,
-  dialectOptions: {
-    ssl: {
-      require: true,
-    },
-  },
+  logging: false
 });
- 
+
 export default db;
